@@ -1,0 +1,22 @@
+name: One-Time Job
+
+on:
+  workflow_dispatch: # Qo'lda ishga tushirish
+
+jobs:
+  run-job:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Run Node.js script
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run your script
+        run: node index.js
