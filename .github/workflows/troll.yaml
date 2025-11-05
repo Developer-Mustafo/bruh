@@ -1,7 +1,7 @@
 name: One-Time Job
-
 on:
-  workflow_dispatch: # Qo'lda ishga tushirish
+  schedule:
+    - cron: '0 0 * * *'
 
 jobs:
   run-job:
