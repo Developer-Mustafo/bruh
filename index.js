@@ -36,4 +36,4 @@ const makeCommits = async (n) => {
   });
 };
 
-makeCommits(500);
+makeCommits(100);
