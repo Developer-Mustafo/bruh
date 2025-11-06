@@ -1,20 +1,23 @@
 name: Daily Commit
 
-# Har kuni ishga tushadi
 on:
   schedule:
-    - cron: '0 0 * * *' # UTC 00:00
-  workflow_dispatch: # Qo'lda ishga tushirish opsiyasi ham mavjud
+    - cron: '0 0 * * *' # Har kuni UTC 00:00 da ishga tushadi
+  workflow_dispatch:
 
 jobs:
   run-job:
     runs-on: ubuntu-latest
+
+    permissions:
+      contents: write   # 🔹 GitHub token'ga yozish ruxsati berildi
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          fetch-depth: 0 # Butun tarixni olish
+          token: ${{ secrets.GITHUB_TOKEN }} # bu endi write huquqli bo‘ladi
+          fetch-depth: 0
 
       - name: Setup Node.js
         uses: actions/setup-node@v3
@@ -26,12 +29,14 @@ jobs:
 
       - name: Configure Git
         run: |
-          git config user.name "Developer-Mustafo"
-          git config user.email "mustaforahimov30@gmail.com"
+          git config user.name "github-actions"
+          git config user.email "github-actions@github.com"
 
       - name: Run script
         run: node index.js
 
-      - name: Push changes
+      - name: Commit & Push changes
         run: |
+          git add .
+          git commit -m "Daily auto commit $(date)" || echo "No changes to commit"
           git push origin main
