@@ -7,8 +7,8 @@ const git = simpleGit();
 const path = "./data.json";
 
 // Git foydalanuvchini sozlash
-await git.addConfig("user.name", "Developer-Mustafo");
-await git.addConfig("user.email", "mustaforahimov30@gmail.com");
+await git.addConfig("user.name", "rahim-mustafo-x");
+await git.addConfig("user.email", "rahim.mustafo.x@gmail.com");
 
 const makeCommits = async (n) => {
   if (n === 0) {
@@ -46,4 +46,5 @@ const makeCommits = async (n) => {
 };
 
 makeCommits(1500);
+
 
